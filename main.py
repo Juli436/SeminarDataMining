@@ -4,8 +4,9 @@ import data_generation as dg
 
 
 if __name__ == '__main__':
-    x, y = dg.get_data_from_sin(100, 0.1, 12.5)
-    plt.scatter(x,y)
+    x, y, betas = dg.get_data(100, 2, 0.1, 0, 1, 10)
+    print(betas)
+    plt.scatter(x[1], y)
     plt.show()
 
 
