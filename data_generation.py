@@ -6,9 +6,7 @@ import numpy as np
 def get_data(n, params,  sig, mean_beta, sig_beta, upper_boundary):
     betas = np.random.normal(loc=mean_beta, scale=sig_beta, size=params)
     x = np.random.uniform(high=upper_boundary, size=(params, n))
-    print(betas)
-    print(x)
+    x[0] = np.ones(n)  # to model constant y-intercept
     y = np.dot(betas, x)
-    print(y)
     noise = np.random.normal(size=n, scale=sig)
     return x, y + noise, betas
