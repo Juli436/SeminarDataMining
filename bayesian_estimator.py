@@ -50,6 +50,13 @@ def bayesian_estimate_with_gaussian_prior_default( x, y, n):
     sig_noise = 0.1
     return bayesian_estimate_with_gaussian_prior(x, y, sig_noise, mean_betas, cov_betas)
 
+def predict(x, mean_estimate, variance_estimate, sig_noise = 0):
+    mean = np.dot(x, mean_estimate)
+    var = np.dot(np.dot(x, variance_estimate)+(sig_noise**2), np.transpose(x))
+    return mean, var
+
+
+
 
 
 

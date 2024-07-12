@@ -159,6 +159,46 @@ def train_and_test():
     plt.show()
     plot_dims(mean[5], var[5][5])
 
+    mean_pred, var_pred  = bayesian_estimator.predict([1, 0,1,0,0,0, 1, 0, 0, 1 ,0, 0], mean, var, 0.1)
+    y_plot = np.linspace(-1, 1, 1000)
+    p_plot_1 = bayesian_estimator.gaussian_var(mean_pred, y_plot, var_pred)
+    plt.plot(y_plot, p_plot_1, label ="Estimate including noise")
+    mean_pred, var_pred = bayesian_estimator.predict([1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0], mean, var)
+    p_plot_2 = bayesian_estimator.gaussian_var(mean_pred, y_plot, var_pred)
+    plt.plot(y_plot, p_plot_2, label= "Estimate excluding noise")
+    plt.legend()
+    plt.title("Predictive distribution")
+    plt.ylabel("p(y)")
+    plt.xlabel("y")
+    plt.show()
+    # Creating figure and axis objects using subplots()
+    fig, ax = plt.subplots(figsize=[9, 7])
+
+    # Plotting the firts line with ax axes
+    ax.plot(y_plot, p_plot_1,
+            color='green', label ="Estimate including noise")
+    plt.xticks(rotation=60)
+    ax.set_xlabel('y', fontsize=14)
+    ax.set_ylabel('p(y) when including noise', color='green', fontsize=14 )
+
+
+    # Create a twin axes ax2 using twinx() function
+    ax2 = ax.twinx()
+
+    # Now, plot the second line with ax2 axes
+    ax2.plot(y_plot, p_plot_2,
+             color='purple', label ="Estimate excluding noise")
+
+    ax2.set_ylabel('p(y) when excluding noise', color='purple', fontsize=14 )
+    plt.title("Predictive distribution", fontsize=14)
+
+
+    plt.show()
+
+
+train_and_test()
+
+
 
 
 
